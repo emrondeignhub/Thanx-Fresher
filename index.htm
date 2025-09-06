@@ -12,6 +12,7 @@
     background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
     color: #4b2e05;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -21,12 +22,28 @@
     max-width: 700px;
     padding: 3rem 3.5rem;
     border-radius: 25px;
+    /* Golden gradient border */
+    border: 8px solid;
+    border-image-slice: 1;
+    border-width: 8px;
+    border-image-source: linear-gradient(45deg, #FFD700, #FFC107, #FFB300, #FFD54F, #FFEB3B);
     box-shadow:
       0 0 15px rgba(255, 193, 7, 0.6),
       0 0 30px rgba(255, 193, 7, 0.4),
       0 0 45px rgba(255, 193, 7, 0.2);
     text-align: center;
     line-height: 1.6;
+    box-sizing: border-box;
+  }
+  .profile-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #d48806;
+    box-shadow: 0 0 15px rgba(212, 136, 6, 0.7);
+    margin: 0 auto 2rem auto;
+    display: block;
   }
   h1 {
     font-size: 2.8rem;
@@ -50,12 +67,34 @@
     font-size: 1.1rem;
     color: #a16207;
   }
+  .download-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    background-color: #d48806;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(212, 136, 6, 0.6);
+    transition: background-color 0.3s ease;
+  }
+  .download-btn:hover {
+    background-color: #b06f00;
+  }
   @media (max-width: 480px) {
     body {
       padding: 1rem;
     }
     .congrats-container {
       padding: 2rem 2rem;
+      border-width: 6px;
+    }
+    .profile-image {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1.5rem;
+      border-width: 4px;
     }
     h1 {
       font-size: 2rem;
@@ -63,17 +102,38 @@
     p {
       font-size: 1rem;
     }
+    .download-btn {
+      font-size: 1rem;
+      padding: 0.7rem 1.5rem;
+    }
   }
 </style>
 </head>
 <body>
-  <article class="congrats-container" role="main" aria-label="Special congratulatory message to Namatovu Kevin">
-    <h1>Heartfelt Congratulations to you <span class="highlight">Namatovu Kevin!</h1>
-      <h1>Queen Fresher 2025!</h1>
+  <article id="congrats" class="congrats-container" role="main" aria-label="Special congratulatory message to Namatovu Kevin">
+    <!-- Replace the src below with the actual image URL or base64 data -->
+    <img src="Kevin3.png" alt="Portrait of Namatovu Kevin" class="profile-image" />
+    <h1>Heartfelt Congratulations to you <span class="highlight">Namatovu Kevin!</span></h1>
+    <h1>Queen Fresher 2025!</h1>
     <p>With grace, charm, and an inspiring spirit, you have captured the hearts of the entire Uganda Martyrs University Nkozi community. Your dedication, confidence, and radiant presence have truly set you apart as a shining beacon of excellence and leadership.</p>
     <p>As Queen Fresher 2025, you embody the hopes and dreams of every student, inspiring us all to strive for greatness with kindness and courage. May your reign be filled with unforgettable moments, empowering achievements, and the joy of uplifting others.</p>
-    <p>We celebrate not just your victory, but the remarkable person you are — a true symbol of strength, beauty, and integrity. Shine on, <span class="highlight">Namatovu Kevin</span>, and continue to lead with your heart and soul.</p>
+    <p>We celebrate not just your victory, but the remarkable person you are, a true symbol of strength, beauty, and integrity. Shine on, <span class="highlight">Namatovu Kevin</span>, and continue to lead with your heart and soul.</p>
     <p class="signature">With admiration and pride,<br />Emron Design Hub</p>
   </article>
+
+  <button id="downloadBtn" class="download-btn" aria-label="Download congratulatory message as image">Download as Image</button>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const element = document.getElementById('congrats');
+      html2canvas(element, { scale: window.devicePixelRatio, useCORS: true }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Namatovu_Kevin_Congratulations.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
 </body>
 </html>
